@@ -1,0 +1,10 @@
+flask
+gunicorn
+gdown
+numpy
+pandas
+pyarrow
+datasets
+faiss-cpu
+transformers
+sentence-transformers

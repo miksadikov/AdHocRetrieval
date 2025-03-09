@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Семантический поиск</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form method="post" action="/">
+            <div class="left-panel">
+                <h2>ТЕКСТ ВОПРОСА</h2>
+                <textarea name="question" rows="5" cols="50" placeholder="Введите ваш вопрос">{{ question }}</textarea>
+                <div class="buttons">
+                    <button type="submit" name="random_question">СЛУЧАЙНЫЙ ВОПРОС</button>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <h2>ТЕКСТ ОТВЕТА</h2>
+                <textarea name="answer" rows="10" cols="60" readonly>{{ answer }}</textarea>
+                <button type="submit" name="get_answer">ПОЛУЧИТЬ ОТВЕТ</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
