@@ -125,7 +125,7 @@ df = table.to_pandas()
 # Загрузка сохранённых данных
 passages = np.load(PASSAGES_PATH, allow_pickle=True)  # Загружаем пассажи
 index = faiss.read_index(INDEX_PATH)                  # Загружаем FAISS индекс
- 
+
 def GetRandomQuestion():
     return df['query'].sample(n=1).iloc[0]
 
@@ -160,6 +160,3 @@ def index():
             answer = GetAnswer(question) if question else "Сначала введите вопрос"
 
     return render_template('index.html', question=question, answer=answer)
-
-if __name__ == '__main__':
-    app.run(debug=True)
