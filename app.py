@@ -96,7 +96,7 @@ def download_and_extract_index():
     else:
         print(f"Индексы уже существуют в {WORK_DIR}")
 
-def answer_question(query, model, index, passages, top_k=1):
+def answer_question(query, model, idx, passages, top_k=1):
     # Преобразование запроса в эмбеддинг
     query_embedding = model.encode(query, convert_to_tensor=False)
 
@@ -104,7 +104,7 @@ def answer_question(query, model, index, passages, top_k=1):
     query_embedding = query_embedding / np.linalg.norm(query_embedding)
 
     # Поиск top_k ближайших пассажей
-    scores, indices = index.search(np.array([query_embedding]), top_k)
+    scores, indices = idx.search(np.array([query_embedding]), top_k)
 
     # Извлечение результатов
     best_passage = passages[indices[0][0]]
@@ -124,7 +124,7 @@ df = table.to_pandas()
 
 # Загрузка сохранённых данных
 passages = np.load(PASSAGES_PATH, allow_pickle=True)  # Загружаем пассажи
-index = faiss.read_index(INDEX_PATH)                  # Загружаем FAISS индекс
+faiss_index = faiss.read_index(INDEX_PATH)            # Загружаем FAISS индекс
 
 def GetRandomQuestion():
     return df['query'].sample(n=1).iloc[0]
@@ -134,7 +134,7 @@ def Paraphase(text):
     return f"Перефразированная версия: {text} (реализуй свою логику)"
 
 def GetAnswer(question):
-    best_answer, _ = answer_question(question, model, index, passages)
+    best_answer, _ = answer_question(question, model, faiss_index, passages)
     return best_answer
 
 @app.route('/', methods=['GET', 'POST'])
