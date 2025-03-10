@@ -134,7 +134,7 @@ def Paraphase(text):
     return f"Перефразированная версия: {text} (реализуй свою логику)"
 
 def GetAnswer(question):
-    best_answer, _ = answer_question(question, model, index, all_passages)
+    best_answer, _ = answer_question(question, model, index, passages)
     return best_answer
 
 @app.route('/', methods=['GET', 'POST'])
